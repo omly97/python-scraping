@@ -1,7 +1,7 @@
 export default {
     name: 'ArticleListItem',
     template: `
-        <v-list-item three-line>
+        <v-list-item three-line :to="{ name: 'post', query: { p: article.link } }">
             <v-list-item-avatar rounded size="90">
                 <v-img
                     lazy-src="https://picsum.photos/10/6?image=30"

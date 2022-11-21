@@ -1,6 +1,7 @@
 Vue.use(VueRouter)
 
 import WelcomePage from '../pages/WelcomePage.js';
+import ArticlePage from '../pages/ArticlePage.js';
 
 const router = new VueRouter({
     routes: [
@@ -9,6 +10,11 @@ const router = new VueRouter({
             alias: '/',
             name:'welcome',
             component: WelcomePage
+        },
+        {
+            path: '/post',
+            name:'post',
+            component: ArticlePage
         }
     ]
 })

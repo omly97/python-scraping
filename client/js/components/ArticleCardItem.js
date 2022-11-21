@@ -1,7 +1,7 @@
 export default {
     name: 'ArticleCardItem',
     template: `
-        <v-card flat color="transparent">
+        <v-card flat color="transparent" :to="{ name: 'post', query: { p: article.link } }">
             <v-img
                 lazy-src="https://picsum.photos/10/6?image=30"
                 :src="image()"

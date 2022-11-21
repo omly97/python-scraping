@@ -19,7 +19,7 @@ class France24():
 
     def __get_post_item(self, html_data: BeautifulSoup):
         return {
-            "link" : self.france24 + (html_data.find("a")['href']),
+            "link" : html_data.find("a")['href'],
             "tag": html_data.find("span", "a-tag__wrapper").text if html_data.find("span", "a-tag__wrapper") != None else None,
             "title" : html_data.find("p", "article__title").text,
             "images": self.__get_post_images(html_data),
@@ -86,3 +86,30 @@ class France24():
             "section_14": self.__get_data__section_GRID_LAYOUT(html_data=data[13]), # SPONSORISES
             "section_15": self.__get_data__section_GRID_LAYOUT(html_data=data[14]), # PARTENARIAT
         }
+
+
+    def __get__data__ARTICLE_CONTENT(self, html_data: BeautifulSoup):
+        return {
+            "title": html_data.find("h1", "t-content__title a-page-title").text,
+            "images": {src.split(' ')[1] : src.split(' ')[0] for src in html_data.find("img")['srcset'].split(',')},
+            "excerpt": html_data.find("p", "t-content__chapo").text,
+            "content": html_data.find("div", "t-content__body u-clearfix").text
+        }
+
+
+    def __get__data__ARTICLE_SUGGEST(self, html_data: BeautifulSoup):
+        return {
+            "title": html_data.find("span", "a-aside-title__content").text,
+            "posts": self.__get_data__section_LIST_LAYOUT(html_data, class_list="o-layout-list", class_list_item="o-layout-list__item l-m-100 l-t-50 l-d-50"),
+        }
+
+
+    def article_page(self, url):
+        soup_data = self.fetch_data_from_url(f"{self.france24}{url}")
+        article_data = soup_data.find("article")
+        suggest_article = soup_data.find("div", "t-content__list-content")
+        return {
+            "main_post": self.__get__data__ARTICLE_CONTENT(article_data),
+            "suggest_post": self.__get__data__ARTICLE_SUGGEST(suggest_article)
+        }
+

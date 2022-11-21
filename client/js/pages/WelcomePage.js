@@ -42,9 +42,21 @@ export default {
                     :listPost="articles.section_4.list_post"
                 ></bloc-LR-layout>
 
-                <bloc-COLUMN-layout
-                    :posts="articles.section_5"
-                ></bloc-COLUMN-layout>
+                <v-container>
+                    <v-row justify="space-around" align="center">
+                        <v-col cols="12" xl="9" lg="9" md="9">
+                            <bloc-COLUMN-layout
+                                :posts="articles.section_5"
+                            ></bloc-COLUMN-layout>
+                        </v-col>
+
+                        <v-col cols="12" xl="3" lg="3" md="3">
+                            <v-skeleton-loader
+                                type="card-avatar"
+                            ></v-skeleton-loader>
+                        </v-col>
+                    </v-row>
+                </v-container>
 
                 <bloc-LR-layout
                     color="#F0F0F0"

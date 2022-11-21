@@ -7,16 +7,16 @@ server_blueprint = Blueprint('server_blueprint', __name__, url_prefix='/api')
 def index():
     try:
         query = request.args.get('q', None)
-        welcome_page = France24()
+        france24 = France24()
         if (query == None):
             return jsonify({
                 "response_status": 3200,
-                "response_data": welcome_page.welcome_page()
+                "response_data": france24.welcome_page()
             })
         else:
             return jsonify({
                 "response_status": 3200,
-                "response_data": query
+                "response_data": france24.article_page(query)
             })
     except Exception as e:
         return jsonify({ "response_status": 3200, "response_text": str(e) })
