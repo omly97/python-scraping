@@ -33,6 +33,16 @@ export default {
             return router.history.current.query.p
         }
     },
+    watch: {
+        'router.history.current.query.p': {
+            handler: function() {
+                this.fetchArticle()
+                console.log("change");
+            },
+            deep: true,
+            immediate: true
+        }
+    },
     methods: {
         fetchArticle() {
             this.loading = true;
