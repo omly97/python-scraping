@@ -1,7 +1,7 @@
 Vue.use(axios)
 
 const instance = axios.create({
-    baseURL: 'https://omly97-scraping.herokuapp.com/api',
+    baseURL: 'https://python-scraping.onrender.com/api',
     headers: {"Content-type": "application/json"} 
 });
 
